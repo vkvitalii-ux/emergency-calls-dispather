@@ -1,4 +1,4 @@
-from database import init_db, add_call
+from .database import init_db, add_call
 
 def classify_call(symptoms: str) -> tuple[str, str]:
     """
@@ -7,7 +7,11 @@ def classify_call(symptoms: str) -> tuple[str, str]:
     symptoms_lower = symptoms.lower()
 
     if "не дышит" in symptoms_lower or "остановка дыхания" in symptoms_lower:
+<<<<<<< HEAD
         return "Критический (0 минут).", "Реанимационная бригада"
+=======
+        return "Критический (0 минут)!", "Реанимационная бригада"
+>>>>>>> feature-urgent
 
     elif "боль в груди" in symptoms_lower or "давит" in symptoms_lower:
         return "Экстренный (до 20 минут)", "Кардиологическая бригада"

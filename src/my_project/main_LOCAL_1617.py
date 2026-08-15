@@ -1,4 +1,4 @@
-from database import init_db, add_call
+from .database import init_db, add_call
 
 def classify_call(symptoms: str) -> tuple[str, str]:
     """
