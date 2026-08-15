@@ -1,4 +1,4 @@
-from database import init_db, add_call
+from .database import init_db, add_call
 
 def classify_call(symptoms: str) -> tuple[str, str]:
     """
@@ -48,5 +48,3 @@ while True:
     print(f"Приоритет вызова: {priority}")
     print(f"Направлена бригада {team_type}")
     print("-" * 40)
-
-# Тестовый комментарий для диплома
