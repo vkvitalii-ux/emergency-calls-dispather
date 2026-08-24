@@ -1,10 +1,14 @@
 from src.my_project.database import init_db, add_call
 
+
 def classify_call(symptoms: str) -> tuple[str, str]:
     """
     Функция принимает список симптомов и возвращает приоритет и профиль бригады.
     """
     symptoms_lower = symptoms.lower()
+
+    if symptoms_lower == "103":
+        return "Экстренный", "Скорая помощь"
 
     if "не дышит" in symptoms_lower or "остановка дыхания" in symptoms_lower:
         return "Критический (0 минут).", "Реанимационная бригада"
@@ -24,6 +28,7 @@ def classify_call(symptoms: str) -> tuple[str, str]:
     else:
         return "ТРЕБУЕТСЯ УТОЧНЕНИЕ ДИСПЕТЧЕРА", "Линейная бригада"
 
+
 if __name__ == "__main__":
     print("--- СИСТЕМА АВТОМАТИЗАЦИИ СКОРОЙ ПОМОЩИ ---")
     print("(Для завершения работы программы введите: выход)\n")
@@ -41,7 +46,7 @@ if __name__ == "__main__":
 
         priority, team_type = classify_call(user_input)
 
-    # СОХРАНЕНИЕ В БАЗУ ДАННЫХ
+        # СОХРАНЕНИЕ В БАЗУ ДАННЫХ
         add_call(user_input, priority, team_type)
 
         print("\n[РЕЗУЛЬТАТ АВТОМАТИЗАЦИИ]:")

@@ -2,6 +2,7 @@ import pytest
 from src.my_project.main import classify_call
 from src.my_project.database import init_db, add_call
 
+
 def test_critical_urgency():
     # 1. Проверяем остановку дыхания
     priority, team = classify_call("у него остановка дыхания")
@@ -26,10 +27,12 @@ def test_trauma_urgency():
     assert "Экстренный" in priority
     assert "Врачебная" in team or "Линейная" in team
 
+
 def test_line_urgency():
     priority, team = classify_call("высокая температура")
     assert "Неотложный" in priority
     assert "Фельдшерская" in team
+
 
 # Проверяем работу с Крупным шрифтом (защита от ошибок диспетчера)
 def test_caps_lock_protection():
@@ -44,6 +47,7 @@ def test_unknown_symptoms():
     assert "ТРЕБУЕТСЯ" in priority
     assert "Линейная" in team
 
+
 # Фикстура, которая подготавливает базу данных перед тестом
 @pytest.fixture()
 def setup_database():
@@ -56,7 +60,7 @@ def test_database_integration(setup_database):
     try:
         add_call(
             symptoms="тестовые симптомы проверки бд",
-            priority= "Тест-Приоритет",
+            priority="Тест-Приоритет",
             team_type="Тест-Бригада"
         )
         db_status = True
@@ -83,12 +87,15 @@ def test_database_error_handling(setup_database):
             team_type="Тест-Бригада"
         )
         db_status = True
+        assert db_status is True
     except (RuntimeError, TypeError, Exception):
         db_status = False
-
-    assert db_status is False
-
+        assert db_status is False
 
 
-
-
+@pytest.mark.parametrize("call_number, expected_type", [
+    ("103", "Скорая помощь")
+])
+def test_emergency_number(call_number, expected_type):
+    priority, team = classify_call(call_number)
+    assert team == expected_type
