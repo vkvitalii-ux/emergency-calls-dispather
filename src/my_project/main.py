@@ -30,17 +30,17 @@ def classify_call(symptoms: str) -> tuple[str, str]:
 
 
 def filter_cardio(calls):
-    """Генератор списков."""
+    """Генератор списков для фильтрации кардио-вызовов."""
     return [c for c in calls if "Кардио" in classify_call(c)]
 
 
 def check_critical(calls):
-    """Генераторное выражение."""
+    """Генераторное выражение для быстрой проверки экстренных."""
     return any("Экстренный" in classify_call(c)[0] for c in calls)
 
 
 def call_stream():
-    """Поток через yield."""
+    """Функция-генератор (yield) потока звонков."""
     yield "Звонок 1: Боль в груди"
     yield "Звонок 2: Температура 39"
 
@@ -64,7 +64,6 @@ if __name__ == "__main__":
 
     while True:
         user_input = input("Введите жалобы пациента: ")
-
         if user_input.lower().strip() == "выход":
             print("Работа программы завершена. До свидания")
             break
