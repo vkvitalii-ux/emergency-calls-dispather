@@ -31,7 +31,7 @@ jobs:
 
       # 4. Устанавливаем все библиотеки проекта (включая pytest)
       - name: Install dependencies
-        run: poetry install --no-interaction --no-root
+        run: poetry install --with dev --no-interaction
 
       # 5. Робот автоматически запускает тесты в облаке
       - name: Run Pytest
