@@ -55,8 +55,12 @@ if __name__ == "__main__":
     print("Есть экстренные:", check_critical(test))
 
     stream = call_stream()
-    print("Первый:", next(stream))
-    print("Второй", next(stream))
+    try:
+        print("Первый:", next(stream))
+        print("Второй:", next(stream))
+        print("Третий:", next(stream))
+    except StopIteration:
+        print("Звонков в очереди больше нет.")
 
     while True:
         user_input = input("Введите жалобы пациента: ")
