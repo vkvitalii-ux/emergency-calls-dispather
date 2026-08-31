@@ -99,3 +99,19 @@ def test_database_error_handling(setup_database):
 def test_emergency_number(call_number, expected_type):
     priority, team = classify_call(call_number)
     assert team == expected_type
+
+
+from my_project.main import call_stream
+
+
+def test_call_stream():
+    """Тестируем, что генератор yield выдает правильные звонки."""
+    # Превращаем поток генератора в обычный список для проверки
+    result = list(call_stream())
+
+    # Проверяем, что в потоке ровно 2 звонка
+    assert len(result) == 2
+
+    # Проверяем точное содержимое первого и второго звонка
+    assert result[0] == "Звонок 1: Боль в груди"
+    assert result[1] == "Звонок 2: Температура 39"
