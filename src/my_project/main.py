@@ -28,13 +28,22 @@ def classify_call(symptoms: str) -> tuple[str, str]:
     else:
         return "ТРЕБУЕТСЯ УТОЧНЕНИЕ ДИСПЕТЧЕРА", "Линейная бригада"
 
+
 def filter_cardio(calls):
     """Генератор списков."""
     return [c for c in calls if "Кардио" in classify_call(c)]
 
+
 def check_critical(calls):
     """Генераторное выражение."""
-    return  any("Экстренный" in classify_call(c)[0] for c in  calls)
+    return any("Экстренный" in classify_call(c)[0] for c in calls)
+
+
+def call_stream():
+    """Поток через yield."""
+    yield "Звонок 1: Боль в груди"
+    yield "Звонок 2: Температура 39"
+
 
 if __name__ == "__main__":
     print("--- СИСТЕМА АВТОМАТИЗАЦИИ СКОРОЙ ПОМОЩИ ---")
@@ -44,6 +53,10 @@ if __name__ == "__main__":
     test = ["Боль в груди", "Температура 39"]
     print("Генератор:", filter_cardio(test))
     print("Есть экстренные:", check_critical(test))
+
+    stream = call_stream()
+    print("Первый:", next(stream))
+    print("Второй", next(stream))
 
     while True:
         user_input = input("Введите жалобы пациента: ")
