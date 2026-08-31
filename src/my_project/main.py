@@ -32,6 +32,10 @@ def filter_cardio(calls):
     """Генератор списков."""
     return [c for c in calls if "Кардио" in classify_call(c)]
 
+def check_critical(calls):
+    """Генераторное выражение."""
+    return  any("Экстренный" in classify_call(c)[0] for c in  calls)
+
 if __name__ == "__main__":
     print("--- СИСТЕМА АВТОМАТИЗАЦИИ СКОРОЙ ПОМОЩИ ---")
     print("(Для завершения работы программы введите: выход)\n")
@@ -39,6 +43,7 @@ if __name__ == "__main__":
 
     test = ["Боль в груди", "Температура 39"]
     print("Генератор:", filter_cardio(test))
+    print("Есть экстренные:", check_critical(test))
 
     while True:
         user_input = input("Введите жалобы пациента: ")
