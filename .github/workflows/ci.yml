@@ -1,6 +1,5 @@
 name: Emergency Dispatcher CI
 
-# Конвейер запускается при любом push-сохранении в ветки main или develop
 on:
   push:
     branches: [ "main", "develop" ]
@@ -24,13 +23,15 @@ jobs:
 
       # 3. Устанавливаем менеджер зависимостей Poetry (он у вас используется)
       - name: Install Poetry
-        run: |
-          curl -sSL https://python-poetry.org | python3 -
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+        uses: snok/poetry-install@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
 
       # 4. Устанавливаем все библиотеки проекта (включая pytest)
       - name: Install dependencies
-        run: poetry install
+        run: poetry install --no-interaction --no-root
 
       # 5. Робот автоматически запускает тесты в облаке
       - name: Run Pytest
