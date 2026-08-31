@@ -242,5 +242,5 @@ dev = ["black", "build", "mypy", "pytest", "pytest-cov", "setuptools", "tox", "t
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.14"
-content-hash = "9e6bcb00e801f7bedfa9be1ef044aa26b623dd1aa553a8e1c40b0789bd6fec84"
+python-versions = ">=3.11"
+content-hash = "e012cc2acf041706b7fb6ccdd71ede0ce0ce6db4f388876f07b7cf301d8799cc"
