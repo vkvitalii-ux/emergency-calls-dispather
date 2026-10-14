@@ -1,4 +1,4 @@
-from src.my_project.database import init_db, add_call
+from src.my_project.database import add_call, init_db
 
 
 def classify_call(symptoms: str) -> tuple[str, str]:
@@ -18,6 +18,9 @@ def classify_call(symptoms: str) -> tuple[str, str]:
 
     elif "острое нарушение речи" in symptoms_lower or "отнялась рука" in symptoms_lower:
         return "Экстренный (до 20 минут)", "Неврологическая бригада"
+
+    elif "своего роста" in symptoms_lower or "собственного роста" in symptoms_lower:
+        return "Неотложный (в порядке очереди)", "Фельдшерская бригада"
 
     elif "дтп" in symptoms_lower or "падение с высоты" in symptoms_lower:
         return "Экстренный (до 20 минут)", "Врачебная/Линейная бригада"

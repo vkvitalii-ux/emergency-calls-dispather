@@ -1,6 +1,6 @@
 import pytest
+from src.my_project.database import add_call, init_db
 from src.my_project.main import classify_call
-from src.my_project.database import init_db, add_call
 
 
 def test_critical_urgency():
@@ -21,6 +21,11 @@ def test_stroke_urgency():
     assert "Экстренный" in priority
     assert "Неврологическая" in team
 
+
+def test_fall_from_own_height():
+    priority, team = classify_call("упала с высоты своего роста")
+    assert "Неотложный" in priority
+    assert "Фельдшерская" in team
 
 def test_trauma_urgency():
     priority, team = classify_call("пострадавший в дтп")
